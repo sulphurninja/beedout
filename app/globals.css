@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #fbf8f1;
+  --cream-2: #ffffff;
+  --tan: #f4eddd;
+  --ink: #181410;
+  --mango: #ff4d00;
+  --sun: #f6bb22;
+  --leaf: #00a05e;
+  --line: rgba(24, 20, 16, 0.1);
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-cream-2: var(--cream-2);
+  --color-tan: var(--tan);
+  --color-ink: var(--ink);
+  --color-mango: var(--mango);
+  --color-sun: var(--sun);
+  --color-leaf: var(--leaf);
+  --color-line: var(--line);
+  --font-sans: var(--font-bricolage), var(--font-tiro);
+  --font-serif: var(--font-instrument), var(--font-tiro);
+  --font-mono: var(--font-space-mono), var(--font-tiro);
+  --font-marathi: var(--font-tiro);
+}
+
+html {
+  background: var(--cream);
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-bricolage), var(--font-tiro), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--mango);
+  color: var(--cream-2);
+}
+
+/* ---------- lenis ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(24, 20, 16, 0.35);
+  border-radius: 99px;
+  border: 3px solid var(--cream);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mango);
+}
+
+/* ---------- refined card system ----------
+   Lives in the components layer so background, border and text
+   utilities on individual elements can still override these defaults. */
+@layer components {
+  .card-pop {
+    border: 1px solid var(--line);
+    box-shadow:
+      0 1px 2px rgba(24, 20, 16, 0.04),
+      0 8px 24px -12px rgba(24, 20, 16, 0.12);
+    transition:
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card-pop:hover {
+    transform: translateY(-5px);
+    box-shadow:
+      0 2px 4px rgba(24, 20, 16, 0.04),
+      0 24px 48px -16px rgba(24, 20, 16, 0.18);
+  }
+
+  .btn-pop {
+    box-shadow:
+      0 1px 2px rgba(24, 20, 16, 0.08),
+      0 6px 16px -8px rgba(24, 20, 16, 0.25);
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.25s ease;
+  }
+  .btn-pop:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 4px rgba(24, 20, 16, 0.08),
+      0 14px 28px -10px rgba(24, 20, 16, 0.3);
+  }
+  .btn-pop:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 1px 2px rgba(24, 20, 16, 0.1);
+  }
+
+  /* marker-swipe highlight behind a word */
+  .marker {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.12em;
+    white-space: nowrap;
+  }
+  .marker::before {
+    content: "";
+    position: absolute;
+    inset: 0.1em -0.06em;
+    background: var(--sun);
+    border-radius: 0.24em;
+    transform: rotate(-0.6deg);
+    z-index: -1;
+  }
+  .marker-mango::before {
+    background: var(--mango);
+  }
+  .marker-mango {
+    color: var(--cream-2);
+  }
+
+  /* soft pill badge */
+  .sticker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--cream-2);
+    color: var(--ink);
+    box-shadow: 0 2px 8px -2px rgba(24, 20, 16, 0.08);
+    padding: 0.5em 1.1em;
+  }
+}
+
+@layer components {
+  .display-tight {
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+  }
+}
+
+/* Devanagari needs taller line boxes or the shirorekha + matras get clipped.
+   Lives in the base layer so explicit leading-* utilities can still override. */
+@layer base {
+  .font-marathi {
+    line-height: 1.5;
+  }
+}
+
+/* ---------- film grain (very subtle, warm) ---------- */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  z-index: 300;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  opacity: 0.02;
+}
+
+/* ---------- marquee ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+}
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+/* ---------- underline link ---------- */
+@layer components {
+  .link-line {
+    position: relative;
+  }
+  .link-line::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-line:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
