@@ -4,9 +4,10 @@ import BootcampContent from "../components/BootcampContent";
 import CTA from "../components/CTA";
 
 export const metadata: Metadata = {
-  title: "AI Bootcamps — BEEDOUT",
+  title: "AI Bootcamps",
   description:
     "AI bootcamps and workshops in Beed — online and offline. Learn AI, learn to build, learn to earn.",
+  alternates: { canonical: "/bootcamps" },
 };
 
 export default function BootcampsPage() {

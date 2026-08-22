@@ -37,11 +37,41 @@ const tiro = Tiro_Devanagari_Marathi({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://beedout.com"),
-  title: "BEEDOUT — The heartbeat of Beed. Built for the world.",
+  title: {
+    default: "BEEDOUT — All of Beed. One app.",
+    template: "%s — BEEDOUT",
+  },
   description:
     "BEEDOUT is the community, business and network layer of Beed, Maharashtra. Clubs, businesses, creators and the next generation — connected. Starting from Beed. Going global.",
+  applicationName: "BEEDOUT",
+  category: "community",
+  keywords: [
+    "Beed",
+    "Beed Maharashtra",
+    "BeedOut",
+    "Beed community app",
+    "Beed businesses",
+    "Beed clubs",
+    "AI bootcamp Beed",
+    "digital marketing Beed",
+    "बीड",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "BEEDOUT — The heartbeat of Beed. Built for the world.",
+    title: "BEEDOUT — All of Beed. One app.",
     description:
       "The community, business and network layer of Beed. Clubs, businesses, creators and the next generation — connected.",
     url: "https://beedout.com",
@@ -49,6 +79,41 @@ export const metadata: Metadata = {
     locale: "en_IN",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "BEEDOUT — All of Beed. One app.",
+    description:
+      "The community, business and network layer of Beed. Clubs, businesses, creators and the next generation — connected.",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://beedout.com/#org",
+      name: "BEEDOUT",
+      url: "https://beedout.com",
+      logo: "https://beedout.com/icon.svg",
+      description:
+        "The community, business and network layer of Beed, Maharashtra.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Beed",
+        addressRegion: "Maharashtra",
+        addressCountry: "IN",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://beedout.com/#website",
+      name: "BEEDOUT",
+      url: "https://beedout.com",
+      publisher: { "@id": "https://beedout.com/#org" },
+      inLanguage: ["en", "mr"],
+    },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -58,6 +123,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${bricolage.variable} ${instrument.variable} ${spaceMono.variable} ${tiro.variable} antialiased`}
     >
       <body className="grain min-h-screen bg-cream text-ink">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <LanguageProvider>
           <SmoothScroll>
             <Nav />

@@ -4,9 +4,10 @@ import ClubsGrid from "../components/ClubsGrid";
 import CTA from "../components/CTA";
 
 export const metadata: Metadata = {
-  title: "Community — BEEDOUT",
+  title: "Community",
   description:
     "Beed's clubs — running, books, startups, creators, cycling, code. Find your people or start your own club.",
+  alternates: { canonical: "/community" },
 };
 
 export default function CommunityPage() {

@@ -5,9 +5,10 @@ import GetOnline from "../components/GetOnline";
 import CTA from "../components/CTA";
 
 export const metadata: Metadata = {
-  title: "Businesses — BEEDOUT",
+  title: "Businesses",
   description:
     "Beed's shops, cafes, gyms and services — online. See who's on BEEDOUT and put your own business on the map.",
+  alternates: { canonical: "/businesses" },
 };
 
 export default function BusinessesPage() {
