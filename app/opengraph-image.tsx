@@ -1,10 +1,17 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt = "BEEDOUT — All of Beed. One app.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const mark = await readFile(
+    join(process.cwd(), "public/brand/beedout-mark.png"),
+  );
+  const markSrc = `data:image/png;base64,${mark.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -40,27 +47,31 @@ export default function OpengraphImage() {
           BEED, MAHARASHTRA — 18.99° N / 75.76° E
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              fontSize: 148,
-              fontWeight: 900,
-              color: "#fbf8f1",
-              letterSpacing: -6,
-              display: "flex",
-            }}
-          >
-            BEEDOUT<span style={{ color: "#ff4d00" }}>.</span>
-          </div>
-          <div
-            style={{
-              fontSize: 44,
-              color: "#f6bb22",
-              marginTop: 8,
-              display: "flex",
-            }}
-          >
-            All of Beed. One app.
+        <div style={{ display: "flex", alignItems: "center", gap: 48 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={markSrc} alt="" width={251} height={180} />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                fontSize: 132,
+                fontWeight: 900,
+                color: "#fbf8f1",
+                letterSpacing: -5,
+                display: "flex",
+              }}
+            >
+              BEEDOUT<span style={{ color: "#ff4d00" }}>.</span>
+            </div>
+            <div
+              style={{
+                fontSize: 42,
+                color: "#f6bb22",
+                marginTop: 8,
+                display: "flex",
+              }}
+            >
+              All of Beed. One app.
+            </div>
           </div>
         </div>
 

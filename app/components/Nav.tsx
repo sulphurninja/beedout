@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -79,13 +80,23 @@ export default function Nav() {
         transition={{ duration: 0.5, ease: EASE }}
       >
         <nav className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 sm:px-10">
-          <Link href="/" className="group flex items-baseline gap-2">
-            <span className="text-xl font-black tracking-tight">
-              BEEDOUT
-              <span className="text-mango">.</span>
-            </span>
-            <span className="font-marathi text-sm text-ink/50 transition-colors group-hover:text-mango">
-              बीड
+          <Link href="/" className="group flex items-center gap-2.5">
+            <Image
+              src="/brand/beedout-mark.png"
+              alt="BeedOut"
+              width={45}
+              height={32}
+              priority
+              className="h-8 w-auto transition-transform duration-300 group-hover:-rotate-3"
+            />
+            <span className="flex items-baseline gap-2">
+              <span className="text-xl font-black tracking-tight">
+                BEEDOUT
+                <span className="text-mango">.</span>
+              </span>
+              <span className="font-marathi text-sm text-ink/50 transition-colors group-hover:text-mango">
+                
+              </span>
             </span>
           </Link>
 
